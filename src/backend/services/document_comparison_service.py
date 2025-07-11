@@ -20,7 +20,7 @@ class DocumentComparisonService:
     
     def __init__(self):
         """Initialize the Document Intelligence client"""
-        self.endpoint = app_settings.azure_document_intelligence_endpoint
+        self.endpoint = app_settings.azure_document_intelligence.endpoint
         
         # Use managed identity if available, otherwise use key
         try:
@@ -33,8 +33,8 @@ class DocumentComparisonService:
         except Exception as e:
             logger.warning(f"Failed to initialize with managed identity: {e}")
             # Fallback to key-based authentication if needed
-            if hasattr(app_settings, 'azure_document_intelligence_key'):
-                credential = AzureKeyCredential(app_settings.azure_document_intelligence_key)
+            if app_settings.azure_document_intelligence.key:
+                credential = AzureKeyCredential(app_settings.azure_document_intelligence.key)
                 self.client = DocumentAnalysisClient(
                     endpoint=self.endpoint,
                     credential=credential
