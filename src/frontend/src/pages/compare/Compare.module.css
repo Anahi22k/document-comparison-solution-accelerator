@@ -1,0 +1,300 @@
+.compareContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.compareHeader {
+  background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 32px;
+  color: white;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.headerIcon {
+  width: 48px;
+  height: 48px;
+  opacity: 0.9;
+}
+
+.title {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+}
+
+.uploadSection {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
+}
+
+.uploadArea {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.uploadBox {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uploadTitle {
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 8px;
+}
+
+.dropZone {
+  border: 2px dashed #c8c6c4;
+  border-radius: 8px;
+  padding: 32px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #faf9f8;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropZone:hover {
+  border-color: #0078d4;
+  background: #f3f9fd;
+}
+
+.dropZone.hasFile {
+  border-color: #107c10;
+  background: #f3f9f3;
+}
+
+.uploadIcon {
+  width: 32px;
+  height: 32px;
+  color: #605e5c;
+  margin-bottom: 8px;
+}
+
+.fileInfo {
+  color: #605e5c;
+  margin-top: 4px;
+}
+
+.errorMessage {
+  margin: 16px 0;
+}
+
+.progressSection {
+  margin: 24px 0;
+  padding: 16px;
+  background: #f3f9fd;
+  border-radius: 8px;
+}
+
+.buttonSection {
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.compareButton {
+  min-width: 160px;
+}
+
+.resultsSection {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resultHeader {
+  display: flex;
+  justify-content: between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.resultTitle {
+  font-weight: 600;
+  color: #323130;
+}
+
+.summaryCard {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-left: 4px solid #0078d4;
+}
+
+.summaryTitle {
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 12px;
+}
+
+.summaryText {
+  color: #605e5c;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.similarityScore {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailsSection {
+  display: grid;
+  gap: 24px;
+}
+
+.detailCard {
+  background: #faf9f8;
+  border-radius: 8px;
+  padding: 24px;
+  border: 1px solid #edebe9;
+}
+
+.cardTitle {
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 16px;
+}
+
+.docInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.docColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #edebe9;
+}
+
+.docName {
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 8px;
+}
+
+.differencesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.diffSection {
+  background: white;
+  border-radius: 6px;
+  padding: 16px;
+  border: 1px solid #edebe9;
+}
+
+.diffTitle {
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 12px;
+}
+
+.contentList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.contentItem {
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  border-left: 3px solid #c8c6c4;
+}
+
+.moreItems {
+  color: #605e5c;
+  font-style: italic;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.noContent {
+  color: #605e5c;
+  font-style: italic;
+}
+
+.commonContent {
+  color: #107c10;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 16px;
+  padding: 8px;
+  background: #f3f9f3;
+  border-radius: 4px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .compareContainer {
+    padding: 16px;
+  }
+  
+  .headerContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .uploadArea {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .docInfo {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .differencesGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .resultHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

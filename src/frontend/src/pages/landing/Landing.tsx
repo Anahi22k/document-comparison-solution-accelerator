@@ -4,7 +4,7 @@ import styles from './Landing.module.css'
 import Contoso from '../../assets/Contoso.svg'
 import { AppStateContext } from "../../state/AppProvider";
 import CardExample from "../../components/FeatureCard/FeatureCard";
-import { NewsRegular, NotepadRegular } from '@fluentui/react-icons'
+import { NewsRegular, NotepadRegular, DocumentSearchRegular } from '@fluentui/react-icons'
 
 const Landing = () => {
   const appStateContext = useContext(AppStateContext)
@@ -43,6 +43,18 @@ const Landing = () => {
                     title="Generate"
                     description="Have AI generate draft documents to save you time"
                     urlSuffix="/generate"
+                />
+
+                <CardExample 
+                    icon={
+                        <DocumentSearchRegular style={{
+                            width: "48px",
+                            height: "40px",
+                        }} />
+                    }
+                    title="Compare"
+                    description="Compare two documents and identify their differences using AI"
+                    urlSuffix="/compare"
                 />
             </Stack>
         </Stack>

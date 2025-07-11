@@ -97,6 +97,7 @@ param AZURE_COSMOSDB_ENABLE_FEEDBACK string = 'True'
 
 param imageTag string
 param applicationInsightsId string
+param keyvaultName string
 
 @description('The Application Insights connection string')
 @secure()
@@ -118,7 +119,6 @@ resource HostingPlan 'Microsoft.Web/serverfarms@2020-06-01' = {
     name: HostingPlanSku
   }
   properties: {
-    name: HostingPlanName
     reserved: true
   }
   kind: 'linux'
@@ -279,6 +279,10 @@ resource Website 'Microsoft.Web/sites@2020-06-01' = {
         {
           name: 'UWSGI_THREADS'
           value: '2'
+        }
+        {
+          name: 'AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT'
+          value: '@Microsoft.KeyVault(VaultName=${keyvaultName};SecretName=AZURE-DOCUMENT-INTELLIGENCE-ENDPOINT)'
         }
       ]
       linuxFxVersion: imageName

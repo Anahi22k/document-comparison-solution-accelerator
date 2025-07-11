@@ -359,10 +359,22 @@ class _BaseSettings(BaseSettings):
     use_promptflow: bool = False
 
 
+class _AzureDocumentIntelligenceSettings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_prefix="AZURE_DOCUMENT_INTELLIGENCE_",
+        env_file=DOTENV_PATH,
+        extra="ignore",
+        env_ignore_empty=True,
+    )
+    endpoint: Optional[str] = None
+    key: Optional[str] = None
+
+
 class _AppSettings(BaseModel):
     base_settings: _BaseSettings = _BaseSettings()
     azure_openai: _AzureOpenAISettings = _AzureOpenAISettings()
     azure_ai: _AzureAISettings = _AzureAISettings()
+    azure_document_intelligence: _AzureDocumentIntelligenceSettings = _AzureDocumentIntelligenceSettings()
     search: _SearchCommonSettings = _SearchCommonSettings()
     ui: Optional[_UiSettings] = _UiSettings()
 

@@ -9,6 +9,7 @@ import Landing from './pages/landing/Landing'
 import Layout from './pages/layout/Layout'
 import NoPage from './pages/NoPage'
 import Document from './pages/document/Document'
+import Compare from './pages/compare/Compare'
 import { AppStateProvider } from './state/AppProvider'
 import { ChatType } from './api'
 
@@ -25,6 +26,7 @@ export default function App() {
             <Route index element={<Landing />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/generate" element={<Chat type={ChatType.Template} />} />
+            <Route path="/compare" element={<Compare />} />
             <Route path="/draft" element={<Draft />} />
             <Route path="*" element={<NoPage />} />
           </Route>

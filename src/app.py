@@ -36,6 +36,7 @@ from azure.ai.agents.models import (
 from backend.api.agent.section_agent_factory import SectionAgentFactory
 from backend.api.agent.browse_agent_factory import BrowseAgentFactory
 from backend.api.agent.template_agent_factory import TemplateAgentFactory
+from backend.services.document_comparison_service import get_document_comparison_service
 
 bp = Blueprint("routes", __name__, static_folder="static", template_folder="static")
 
@@ -1251,6 +1252,93 @@ async def get_section_content(request_body, request_headers):
             await section_project_client.agents.threads.delete(thread_id=thread.id)
 
     return response_text
+
+
+@bp.route("/compare", methods=["GET"])
+async def compare_page():
+    """Serve the document comparison page"""
+    return await render_template(
+        "index.html", title=app_settings.ui.title, favicon=app_settings.ui.favicon
+    )
+
+
+@bp.route("/api/compare/upload", methods=["POST"])
+async def upload_documents():
+    """Upload and analyze two documents for comparison"""
+    try:
+        files = await request.files
+        
+        if 'document1' not in files or 'document2' not in files:
+            return jsonify({"error": "Both document1 and document2 files are required"}), 400
+        
+        doc1_file = files['document1']
+        doc2_file = files['document2']
+        
+        if not doc1_file.filename or not doc2_file.filename:
+            return jsonify({"error": "Both files must have valid filenames"}), 400
+        
+        # Read file contents
+        doc1_content = await doc1_file.read()
+        doc2_content = await doc2_file.read()
+        
+        # Get the document comparison service
+        comparison_service = get_document_comparison_service()
+        
+        # Analyze both documents
+        doc1_analysis = await comparison_service.analyze_document(doc1_content, doc1_file.filename)
+        doc2_analysis = await comparison_service.analyze_document(doc2_content, doc2_file.filename)
+        
+        # Compare the documents
+        comparison_result = comparison_service.compare_documents(doc1_analysis, doc2_analysis)
+        
+        # Track the event
+        track_event_if_configured("DocumentComparison", {
+            "doc1_filename": doc1_file.filename,
+            "doc2_filename": doc2_file.filename,
+            "similarity_score": comparison_result.get("similarity_score", 0)
+        })
+        
+        return jsonify({
+            "success": True,
+            "comparison": comparison_result
+        })
+        
+    except Exception as e:
+        logging.exception("Exception in upload_documents")
+        return jsonify({"error": f"Failed to process documents: {str(e)}"}), 500
+
+
+@bp.route("/api/compare/analyze", methods=["POST"])
+async def analyze_single_document():
+    """Analyze a single document and return its content"""
+    try:
+        files = await request.files
+        
+        if 'document' not in files:
+            return jsonify({"error": "Document file is required"}), 400
+        
+        doc_file = files['document']
+        
+        if not doc_file.filename:
+            return jsonify({"error": "File must have a valid filename"}), 400
+        
+        # Read file content
+        doc_content = await doc_file.read()
+        
+        # Get the document comparison service
+        comparison_service = get_document_comparison_service()
+        
+        # Analyze the document
+        analysis_result = await comparison_service.analyze_document(doc_content, doc_file.filename)
+        
+        return jsonify({
+            "success": True,
+            "analysis": analysis_result
+        })
+        
+    except Exception as e:
+        logging.exception("Exception in analyze_single_document")
+        return jsonify({"error": f"Failed to analyze document: {str(e)}"}), 500
 
 
 app = create_app()
